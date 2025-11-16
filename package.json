@@ -1,0 +1,41 @@
+{
+  "name": "keyword-automation",
+  "version": "1.0.0",
+  "description": "This guide shows you how to build a keyword-triggered chatbot automation system similar to ManyChat, but using Claude Code and MCP servers. This approach can save **70-90% in costs** compared to commercial platforms like ManyChat.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/francesca-tabor-ai/keyword-automation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/francesca-tabor-ai/keyword-automation/issues"
+  },
+  "homepage": "https://github.com/francesca-tabor-ai/keyword-automation#readme",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.69.0",
+    "axios": "^1.13.2",
+    "body-parser": "^2.2.0",
+    "bull": "^4.16.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "node-fetch": "^3.3.2",
+    "redis": "^5.9.0",
+    "sequelize": "^6.37.7",
+    "sqlite3": "^5.1.7",
+    "winston": "^3.18.3",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.10.1",
+    "nodemon": "^3.1.11",
+    "typescript": "^5.9.3"
+  }
+}
