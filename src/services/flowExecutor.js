@@ -23,8 +23,8 @@ class FlowExecutor {
     }
 
     async startFlow(userId, platform, flowName) {
-        const flow = await this.loadFlow(flowName);
-        
+         const flow = await this.loadFlow(flowName);
+    
         if (!flow) {
             throw new Error('Flow ' + flowName + ' not found');
         }
@@ -32,7 +32,12 @@ class FlowExecutor {
         const conversationId = await this.createConversation(userId, platform, flowName);
 
         const firstStep = flow.steps[0];
-        const response = await this.executeStep(conversationId, flow, firstStep, null);
+        
+        // Set the current step ID in context
+        const context = { currentStepId: firstStep.id };
+        await this.updateConversation(conversationId, context);
+        
+        const response = await this.executeStep(conversationId, flow, firstStep, context);
 
         return { conversationId, response };
     }

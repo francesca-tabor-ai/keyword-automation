@@ -4,9 +4,9 @@
   "description": "This guide shows you how to build a keyword-triggered chatbot automation system similar to ManyChat, but using Claude Code and MCP servers. This approach can save **70-90% in costs** compared to commercial platforms like ManyChat.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "node src/utils/testFlow.js"
   },
   "repository": {
     "type": "git",
