@@ -39,5 +39,12 @@
     "@types/node": "^24.10.1",
     "nodemon": "^3.1.11",
     "typescript": "^5.9.3"
+  },
+  "scripts": {
+    "validate-env": "node src/scripts/validate-env.js",
+    "start": "npm run validate-env && node src/server.js",
+    "dev": "npm run validate-env && nodemon src/server.js"
   }
+}
+
 }
