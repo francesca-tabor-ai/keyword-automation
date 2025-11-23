@@ -7,6 +7,8 @@ const path = require('path');
 const KeywordMatcher = require('./services/keywordMatcher');
 const IntentDetector = require('./services/intentDetector');
 const FlowExecutor = require('./services/flowExecutor');
+const WhatsAppIntegration = require('./integrations/whatsapp');
+const TelegramIntegration = require('./integrations/telegram');
 
 const app = express();
 app.use(bodyParser.json());
@@ -16,6 +18,7 @@ const DB_PATH = path.join(__dirname, '../data/chatbot.db');
 let db, keywordMatcher, intentDetector, flowExecutor;
 
 async function initialize() {
+    async function initialize() {
     db = new sqlite3.Database(DB_PATH);
     console.log('Database connected');
     
@@ -29,6 +32,22 @@ async function initialize() {
     
     intentDetector = new IntentDetector(process.env.ANTHROPIC_API_KEY);
     flowExecutor = new FlowExecutor(db, anthropicClient);
+    
+    // Initialize platform integrations
+    if (process.env.WHATSAPP_PHONE_NUMBER_ID && process.env.WHATSAPP_ACCESS_TOKEN) {
+        global.whatsappClient = new WhatsAppIntegration(
+            process.env.WHATSAPP_PHONE_NUMBER_ID,
+            process.env.WHATSAPP_ACCESS_TOKEN
+        );
+        console.log('WhatsApp integration initialized');
+    }
+    
+    if (process.env.TELEGRAM_BOT_TOKEN) {
+        global.telegramClient = new TelegramIntegration(
+            process.env.TELEGRAM_BOT_TOKEN
+        );
+        console.log('Telegram integration initialized');
+    }
     
     console.log('System initialized successfully');
 }
@@ -207,11 +226,51 @@ async function sendResponse(platform, recipient, responses) {
 }
 
 async function sendTextMessage(platform, recipient, text) {
-    console.log(`[${platform}] To ${recipient}: ${text}`);
+    switch (platform) {
+        case 'whatsapp':
+            if (global.whatsappClient) {
+                await global.whatsappClient.sendMessage(recipient, text);
+            } else {
+                console.log(`[${platform}] To ${recipient}: ${text}`);
+            }
+            break;
+        
+        case 'telegram':
+            if (global.telegramClient) {
+                await global.telegramClient.sendMessage(recipient, text);
+            } else {
+                console.log(`[${platform}] To ${recipient}: ${text}`);
+            }
+            break;
+        
+        default:
+            console.log(`[${platform}] To ${recipient}: ${text}`);
+    }
 }
 
 async function sendButtons(platform, recipient, options) {
-    console.log(`[${platform}] Buttons to ${recipient}:`, options.map(o => o.label).join(', '));
+    const buttonText = 'Please select an option:';
+    
+    switch (platform) {
+        case 'whatsapp':
+            if (global.whatsappClient) {
+                await global.whatsappClient.sendButtons(recipient, buttonText, options);
+            } else {
+                console.log(`[${platform}] Buttons to ${recipient}:`, options.map(o => o.label).join(', '));
+            }
+            break;
+        
+        case 'telegram':
+            if (global.telegramClient) {
+                await global.telegramClient.sendButtons(recipient, buttonText, options);
+            } else {
+                console.log(`[${platform}] Buttons to ${recipient}:`, options.map(o => o.label).join(', '));
+            }
+            break;
+        
+        default:
+            console.log(`[${platform}] Buttons to ${recipient}:`, options.map(o => o.label).join(', '));
+    }
 }
 
 const PORT = process.env.PORT || 3000;
