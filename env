@@ -1,0 +1,35 @@
+# ====================================
+# WhatsApp Business API Configuration
+# ====================================
+
+# Your WhatsApp Phone Number ID
+WHATSAPP_PHONE_NUMBER_ID=933906146454175
+
+# Your WhatsApp Access Token (from Meta Console)
+WHATSAPP_ACCESS_TOKEN=EAALm4bLDNZC0BP2UTfZAdeCVJXPgY4ZCT0aBr9LmFgSfZAYB3KxeRksaKwt0bblNNJJFwSIdLjlZCkTMflecQprq5DLopvAIwdRGe29oQE9bynydrtkDp2UHSroYj4bZAHnpVEzn6mEsmRcm53blOVeVcpgx3YlOcYFMZC2cuCKDe1Jj2T1jvfpPZAC5VSyuvEAxLhFwNIXXjhLefMYNp8j1LAHzd5MijXlUqeDyO6N5HtsTl8HiFMsZD
+
+# Your WhatsApp Verify Token (for webhook verification)
+WHATSAPP_VERIFY_TOKEN=76685ca55e2fe454b9e69bcc176dc39ea375f30dee9ffc16e7f713a04f0065cc
+
+# Your WhatsApp Business Account ID
+WHATSAPP_BUSINESS_ACCOUNT_ID=1243711184450952
+
+# ====================================
+# Telegram Bot Configuration
+# ====================================
+
+# Your Telegram Bot Token (get from @BotFather)
+TELEGRAM_BOT_TOKEN=your_bot_token_here
+
+# ====================================
+# Optional Configuration
+# ====================================
+
+# Webhook URL (for production)
+# WEBHOOK_URL=https://yourdomain.com/webhook
+
+# Server Port
+PORT=3000
+
+# Environment
+NODE_ENV=development

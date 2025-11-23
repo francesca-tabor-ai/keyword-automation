@@ -42,3 +42,9 @@ build/
 tmp/
 temp/
 .env
+
+.env*
+.flaskenv*
+!.env.project
+!.env.vault.env*
+.env.production

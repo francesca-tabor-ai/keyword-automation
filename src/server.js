@@ -1,4 +1,17 @@
-require('dotenv').config();
+const config = require('./config');
+const Anthropic = require('@anthropic-ai/sdk');
+
+// Initialize Anthropic with config
+const anthropicClient = new Anthropic({
+    apiKey: config.anthropic.apiKey
+});
+
+// Start server
+app.listen(config.server.port, () => {
+    console.log(`🚀 Server running on port ${config.server.port}`);
+    console.log(`📍 Environment: ${config.server.env}`);
+    console.log(`🔗 Base URL: ${config.server.baseUrl}`);
+});
 const express = require('express');
 const bodyParser = require('body-parser');
 const Anthropic = require('@anthropic-ai/sdk');
